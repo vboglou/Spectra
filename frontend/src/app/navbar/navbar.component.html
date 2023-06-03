@@ -1,0 +1,40 @@
+
+<p>
+  <mat-toolbar color="primary">
+    <span class="spanHeading">Mill Thrace - Online Supervisory System</span>
+  </mat-toolbar>
+</p>
+
+
+<nav mat-tab-nav-bar >
+  <a mat-tab-link *ngFor="let link of links; index as i"
+     [href]="link"
+     (click)="activeLink = link"
+     [active]="activeLink == link"> {{titles[i]}} </a>
+</nav>
+
+<router-outlet></router-outlet>
+
+<!--
+<mat-card>
+  <div style="text-align:center;">
+  <mat-card-title>Summary</mat-card-title>
+  </div>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>1</mat-grid-tile>
+    <mat-grid-tile>2</mat-grid-tile>
+    <mat-grid-tile>3</mat-grid-tile>
+    <mat-grid-tile>4</mat-grid-tile>
+  </mat-grid-list>
+  </mat-card>
+
+-->
+<!--
+<nav mat-tab-nav-bar >
+  <a mat-tab-link *ngFor="let link of links; index as i"
+     [href]="link"
+     (click)="activeLink = link"
+     [active]="activeLink == link"> {{titles[i]}} </a>
+</nav>
+
+-->

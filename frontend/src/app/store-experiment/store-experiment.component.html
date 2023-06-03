@@ -1,0 +1,53 @@
+<mat-toolbar color="primary" class="header">
+<div>Store reference data</div>
+</mat-toolbar>
+
+<mat-card>
+<mat-card-title></mat-card-title>
+<mat-card-content>
+  <form id="formdata" #formData="ngForm" (ngSubmit) = storeExpData(formData.value)>
+    <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Sensor id</mat-label>
+      <input matInput placeholder="sensor_id" name="sensor_id" ngModel>
+    </mat-form-field>
+    </p>
+    <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+        <mat-select  placeholder="type" name="type" ngModel>
+          <mat-option value="one">Wheat</mat-option>
+          <mat-option value="two">Flour</mat-option>
+        </mat-select>
+    </mat-form-field>
+    </p>
+    <mat-form-field appearance="fill">
+      <mat-label>Protein</mat-label>
+      <input matInput  placeholder="protein" name="protein" ngModel>
+    </mat-form-field>
+    <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Moisture</mat-label>
+      <input matInput  placeholder="moisture" name="moisture" ngModel>
+    </mat-form-field>
+    </p>
+    <p>
+    <mat-form-field appearance="fill">
+      <mat-label>Sampling timestep</mat-label>
+      <input matInput type="datetime-local"  placeholder="capturedTime" name="capturedTime" ngModel>
+    </mat-form-field>
+    </p>
+    <button type="submit" mat-raised-button color="primary">Store experiment</button>
+  </form>
+
+
+</mat-card-content>
+</mat-card>
+<!--    var sensor_id = req.body.sensor_id;
+      var type = req.body.email;
+      var protein = req.body.protein;
+      var moisture = req.body.moisture;
+      var capturedTime = req.body.capturedTime;-->
+
+
+

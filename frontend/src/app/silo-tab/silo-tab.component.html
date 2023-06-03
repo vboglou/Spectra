@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-toolbar color="primary" class="header">
+    <span>Silo meassurements</span>
+    <span class="example-spacer"></span>
+    <span>
+      <mat-form-field >
+        <mat-label></mat-label>
+        <mat-select [(ngModel)]="SelectedSilo" (selectionChange)="SiloSelection($event)">
+          <mat-option *ngFor="let sp of siloNumber" [value]="sp.value">
+            {{sp.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </span>
+  </mat-toolbar>
+  </mat-card>
+
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>Plot</mat-card-title>
+  </div>
+</mat-card>
+
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>Table</mat-card-title>
+  </div>
+<div class="matrix-container mat-elevation-z8">
+<table mat-table [dataSource]="datasource.data" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Measurement id </th>
+    <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="silo_id">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Silo </th>
+    <td mat-cell *matCellDef="let element"> {{element.siloID}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="reference_silo">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Reference silo </th>
+    <td mat-cell *matCellDef="let element"> {{element.isDriver}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="x_value">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Smart bob </th>
+    <td mat-cell *matCellDef="let element"> {{element.x_value}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="y_value">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> 3D scanner </th>
+    <td mat-cell *matCellDef="let element"> {{element.y_value}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="timestamp">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Timestamp </th>
+    <td mat-cell *matCellDef="let element"> {{element.timestamp | date: 'yyyy/MM/dd h:mm:ss a'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+</mat-card>
+
+<mat-card>
+Train system
+<form id="formdata" #formData="ngForm" (ngSubmit) = TrainSystem()>
+  <button type="submit" mat-raised-button color="primary">Train system</button>
+</form>
+
+</mat-card>
+
+

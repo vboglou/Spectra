@@ -1,0 +1,50 @@
+.example-spacer {
+  flex: 1 1 auto;
+  display: flex;
+}
+
+.mat-select-panel {
+  background: red;
+
+}
+table {
+  width: 100%;
+
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* if space between cards */
+  justify-content: center; /* if no space between cards */
+}
+.card {
+  flex-basis: 300px;
+  border: 1px solid black;
+  min-height: 150px;
+}
+
+.matrix-container {
+  height: 400px;
+  max-width: 100%;
+  position: relative;
+  overflow: auto;
+  width: 100%;
+}
+
+.mat-header-cell {
+  min-height: 12px;
+  font-size: 12pt;
+}
+
+#plot {
+  position: relative;
+  height: 600px;
+  left: 0;
+  right: 0;
+  margin-top: 5px;
+}
+
+
+
+

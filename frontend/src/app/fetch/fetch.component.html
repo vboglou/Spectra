@@ -1,0 +1,146 @@
+<mat-card>
+<mat-toolbar color="primary" class="header">
+  <span>Wheat meassurements</span>
+  <span class="example-spacer"></span>
+  <span>
+    <mat-form-field >
+      <mat-label></mat-label>
+      <mat-select [(ngModel)]="SelectedValue" (selectionChange)="SamplingPointselection($event)">
+        <mat-option *ngFor="let sp of sampling_point" [value]="sp.value">
+          {{sp.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </span>
+</mat-toolbar>
+</mat-card>
+
+
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>Plot</mat-card-title>
+  </div>
+<div id="plot">
+  <ngx-charts-line-chart
+
+    [results]="proteinData"
+    [scheme]="colorScheme"
+    [legend]="legend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [autoScale]="'autoScale'"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [timeline]="timeline"
+    >
+  </ngx-charts-line-chart>
+  </div>
+</mat-card>
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>Table</mat-card-title>
+  </div>
+<div class="matrix-container mat-elevation-z8">
+<table mat-table [dataSource]="datasource.data" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="id">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Database id </th>
+    <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="meas_id">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Meassurement id </th>
+    <td mat-cell *matCellDef="let element"> {{element.meassure_id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sam_point">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Sampling point </th>
+    <td mat-cell *matCellDef="let element"> {{element.sampling_point}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="protein">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Protein (%) </th>
+    <td mat-cell *matCellDef="let element"> {{element.protein}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="moisture">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Moisture (%) </th>
+    <td mat-cell *matCellDef="let element"> {{element.moisture}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="timestamp">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef> Timestamp </th>
+    <td mat-cell *matCellDef="let element"> {{element.timestamp | date: 'yyyy/MM/dd h:mm:ss a'}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+</div>
+</mat-card>
+<mat-card>
+<div style="text-align:center;">
+<mat-card-title>Statistics</mat-card-title>
+</div>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title style="text-align:center;">Meassuring period</mat-card-title>
+      <mat-card-content>
+        <form id="statisticsQuery" #formData="ngForm" (ngSubmit) = getStatisticsData(formData.value)>
+          <p>
+          <mat-form-field appearance="fill">
+            <mat-label>From</mat-label>
+            <input matInput type="datetime-local"  placeholder="from_date" name="from_date" ngModel>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>To</mat-label>
+            <input matInput type="datetime-local"  placeholder="to_date" name="to_date" ngModel>
+          </mat-form-field>
+        </p>
+          <p style="text-align:center;">
+          <button type="submit" mat-raised-button color="primary" >Get statistics</button>
+         </p>
+        </form>
+      </mat-card-content>
+   </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+      <mat-card>
+        <mat-card-title style="text-align:center;">Mean</mat-card-title>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item> Protein: {{ proteinMean }}</mat-list-item>
+            <mat-list-item> Moisture: {{ moistureMean }}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title style="text-align:center;">Variance</mat-card-title>
+      <mat-list>
+        <mat-list-item> Protein: {{ proteinVar }}</mat-list-item>
+        <mat-list-item> Moisture: {{ moistureVar }}</mat-list-item>
+      </mat-list>
+    </mat-card>
+
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-title style="text-align:center;">Number of meassurements</mat-card-title>
+      <mat-list>
+        <mat-list-item> {{ measNumber }} Meassurements</mat-list-item>
+
+      </mat-list>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+</mat-card>
+
+
+

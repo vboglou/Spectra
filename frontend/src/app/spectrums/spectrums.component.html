@@ -1,0 +1,118 @@
+<mat-card>
+  <mat-toolbar color="primary" class="header">
+    <span>Spectrum analyzer</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
+</mat-card>
+
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>Spectrum selection</mat-card-title>
+  </div>
+  <mat-grid-list cols="1" rowHeight="1:4"></mat-grid-list>
+
+
+  <mat-card>
+    <mat-card-title></mat-card-title>
+    <mat-card-content>
+    <form id="formdata" #formData="ngForm" (ngSubmit) = getSelectedSpectrum(formData.value)>
+      <div class="example">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Measurement id</mat-label>
+          <input matInput placeholder="measure_id" name="measure_id" ngModel>
+        </mat-form-field>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <mat-form-field appearance="fill">
+          <mat-label>Timestamp</mat-label>
+          <input matInput type="datetime-local" placeholder="timestamp" name="timestamp" ngModel>
+        </mat-form-field>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        <button type="submit" mat-raised-button color="primary">Get spectrum</button>
+      </div>
+
+    </form>
+    </mat-card-content>
+  </mat-card>
+
+</mat-card>
+
+
+
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>Captured spectrum</mat-card-title>
+  </div>
+  <div id="plot">
+    <ngx-charts-line-chart
+      [results]="spectrumsData"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [autoScale]="'autoScale'"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      >
+    </ngx-charts-line-chart>
+  </div>
+
+
+</mat-card>
+
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>First derivatives</mat-card-title>
+  </div>
+  <div id="plot">
+    <ngx-charts-line-chart
+      [results]="firstDerivativesData"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [autoScale]="'autoScale'"
+      [xAxisLabel]="xAxisLabel1"
+      [yAxisLabel]="yAxisLabel1"
+      [timeline]="timeline"
+      >
+    </ngx-charts-line-chart>
+  </div>
+
+
+</mat-card>
+
+<mat-card>
+  <div style="text-align:center;">
+    <mat-card-title>Savitzky–Golay filter</mat-card-title>
+  </div>
+  <div id="plot">
+    <ngx-charts-line-chart
+      [results]="smoothFilterData"
+      [scheme]="colorScheme"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [autoScale]="'autoScale'"
+      [xAxisLabel]="xAxisLabel2"
+      [yAxisLabel]="yAxisLabel2"
+      [timeline]="timeline"
+      >
+    </ngx-charts-line-chart>
+  </div>
+
+
+</mat-card>
+
+<p>spectrums works!</p>
